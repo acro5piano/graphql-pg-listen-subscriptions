@@ -2,6 +2,10 @@
 
 This package implements the PubSubEngine Interface from the [graphql-subscriptions](https://github.com/apollographql/graphql-subscriptions) package.
 
+# Why
+
+I've tried [a package](https://github.com/GraphQLCollege/graphql-postgres-subscriptions) to implement pg pubsub and GraphQL subscriptions, but it no longer works.
+
 # Install
 
 ```sh

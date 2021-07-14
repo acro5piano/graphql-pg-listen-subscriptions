@@ -1,6 +1,6 @@
 {
   "name": "graphql-pg-listen-subscriptions",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "build/index.js",
   "repository": "git@github.com:acro5piano/graphql-pg-listen-subscriptions",
   "author": "gosho-kazuya <ketsume0211@gmail.com>",
@@ -10,7 +10,7 @@
     "build/*"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf build && tsc -p tsconfig.prod.json",
     "prepublish": "npm run build",
     "test": "ava"
   },
@@ -24,6 +24,7 @@
     "pg": "^8.6.0",
     "pg-listen": "^1.7.0",
     "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },

@@ -1,6 +1,6 @@
 {
   "name": "graphql-pg-listen-subscriptions",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "build/index.js",
   "repository": "git@github.com:acro5piano/graphql-pg-listen-subscriptions",
   "author": "gosho-kazuya <ketsume0211@gmail.com>",

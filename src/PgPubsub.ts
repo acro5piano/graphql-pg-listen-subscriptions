@@ -22,7 +22,8 @@ export class PgPubsub implements PubSubEngine {
   ) {
     await this.subscriber.listenTo(subject)
     await this.subscriber.notifications.on(subject, onMessage)
-    const sid = this.currentSubscriptionId++
+    this.currentSubscriptionId++
+    const sid = this.currentSubscriptionId
     this.sidMap.set(sid, subject)
     return sid
   }

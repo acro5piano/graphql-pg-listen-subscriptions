@@ -17,20 +17,23 @@ test.before(async () => {
 
 test.serial('PgPubsub', async (t) => {
   t.plan(1)
-  await pubsub.subscribe('my-topic', (message: typeof payload) => {
+  const sid = await pubsub.subscribe('my-topic', (message: typeof payload) => {
     t.is(message.greeting, 'Hello')
   })
   await pubsub.publish('my-topic', payload)
+  await pubsub.unsubscribe(sid)
 })
 
 test.serial('PgPubsub - same topic, multiple subscribers', async (t) => {
   t.plan(1)
-  const sid = await pubsub.subscribe('my-topic', (message: typeof payload) => {
+  const sid1 = await pubsub.subscribe('my-topic', () => {
     // do nothing
   })
-  await pubsub.subscribe('my-topic', (message: typeof payload) => {
+  const sid2 = await pubsub.subscribe('my-topic', (message: typeof payload) => {
     t.is(message.greeting, 'Hello')
   })
-  await pubsub.unsubscribe(sid)
+  await pubsub.unsubscribe(sid1)
+  await pubsub.publish('my-topic', payload)
+  await pubsub.unsubscribe(sid2)
   await pubsub.publish('my-topic', payload)
 })

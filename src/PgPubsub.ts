@@ -12,8 +12,7 @@ export class PgPubsub implements PubSubEngine {
   constructor(subscriberOrString: Subscriber | string) {
     if (typeof subscriberOrString === 'string') {
       this.subscriber = createSubscriber({
-        connectionString:
-          'postgres://postgres:postgres@127.0.0.1:17346/postgres',
+        connectionString: subscriberOrString,
       })
     } else {
       this.subscriber = subscriberOrString

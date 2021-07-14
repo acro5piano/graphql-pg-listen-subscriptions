@@ -1,18 +1,16 @@
 import { PgPubsub } from '../src'
 import test from 'ava'
-import createSubscriber from 'pg-listen'
 
 const payload = {
   greeting: 'Hello',
 }
 
-const pgListenSubscriber = createSubscriber({
-  connectionString: 'postgres://postgres:postgres@127.0.0.1:17346/postgres',
-})
-const pubsub = new PgPubsub(pgListenSubscriber)
+const pubsub = new PgPubsub(
+  'postgres://postgres:postgres@127.0.0.1:17346/postgres',
+)
 
 test.before(async () => {
-  await pgListenSubscriber.connect()
+  await pubsub.connect()
 })
 
 test.serial('PgPubsub', async (t) => {

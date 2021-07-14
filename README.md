@@ -9,22 +9,15 @@ I've tried [a package](https://github.com/GraphQLCollege/graphql-postgres-subscr
 # Install
 
 ```sh
-yarn add graphql-pg-listen-subscriptions pg-listen
+yarn add graphql-pg-listen-subscriptions
 ```
 
 # Getting Started
 
 ```typescript
 import { PgPubsub } from 'graphql-pg-listen-subscriptions'
-import createSubscriber from 'pg-listen'
 
-const pgListenSubscriber = createSubscriber({
-  connectionString: 'postgres://user:pass@127.0.0.1/my-db',
-})
-
-pgListenSubscriber.connect()
-
-export const pubsub = new PgPubsub(pgListenSubscriber)
+export const pubsub = new PgPubsub('postgres://user:pass@127.0.0.1/my-db')
 ```
 
 Now, implement your Subscriptions type resolver, using the `pubsub.asyncIterator` to map the event you need:

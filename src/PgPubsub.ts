@@ -1,4 +1,5 @@
 import type { PubSubEngine } from 'graphql-subscriptions'
+import createSubscriber from 'pg-listen'
 import type { Subscriber } from 'pg-listen'
 
 import { PubSubAsyncIterator } from './pubsub-async-iterator'
@@ -8,8 +9,19 @@ export class PgPubsub implements PubSubEngine {
   private sidMap = new Map<number, string>()
   private currentSubscriptionId = 0
 
-  constructor(subscriber: Subscriber) {
-    this.subscriber = subscriber
+  constructor(subscriberOrString: Subscriber | string) {
+    if (typeof subscriberOrString === 'string') {
+      this.subscriber = createSubscriber({
+        connectionString:
+          'postgres://postgres:postgres@127.0.0.1:17346/postgres',
+      })
+    } else {
+      this.subscriber = subscriberOrString
+    }
+  }
+
+  async connect() {
+    this.subscriber.connect()
   }
 
   async publish(subject: string, payload: any) {

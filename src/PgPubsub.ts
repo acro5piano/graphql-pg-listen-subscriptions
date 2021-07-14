@@ -16,7 +16,10 @@ export class PgPubsub implements PubSubEngine {
     await this.subscriber.notify(subject, payload)
   }
 
-  async subscribe(subject: string, onMessage: (payload: object) => void) {
+  async subscribe<T extends object>(
+    subject: string,
+    onMessage: (payload: T) => void,
+  ) {
     await this.subscriber.listenTo(subject)
     await this.subscriber.notifications.on(subject, onMessage)
     const sid = this.currentSubscriptionId++
@@ -27,7 +30,15 @@ export class PgPubsub implements PubSubEngine {
   async unsubscribe(sid: number) {
     const topic = this.sidMap.get(sid)!
     this.sidMap.delete(sid)
-    await this.subscriber.unlisten(topic)
+    let isTopicStillSubscribing = false
+    this.sidMap.forEach((t) => {
+      if (t === topic) {
+        isTopicStillSubscribing = true
+      }
+    })
+    if (!isTopicStillSubscribing) {
+      await this.subscriber.unlisten(topic)
+    }
   }
 
   asyncIterator<T>(subjects: string | string[]): AsyncIterator<T> {

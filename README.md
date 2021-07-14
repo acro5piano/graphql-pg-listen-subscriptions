@@ -17,7 +17,6 @@ yarn add graphql-pg-listen-subscriptions pg-listen
 ```typescript
 import { PgPubsub } from 'graphql-pg-listen-subscriptions'
 import createSubscriber from 'pg-listen'
-import * as config from 'src/config'
 
 const pgListenSubscriber = createSubscriber({
   connectionString: 'postgres://user:pass@127.0.0.1/my-db',

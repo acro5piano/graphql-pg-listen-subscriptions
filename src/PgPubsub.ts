@@ -24,6 +24,10 @@ export class PgPubsub implements PubSubEngine {
     this.subscriber.connect()
   }
 
+  async close() {
+    this.subscriber.close()
+  }
+
   async publish(subject: string, payload: any) {
     await this.subscriber.notify(subject, payload)
   }

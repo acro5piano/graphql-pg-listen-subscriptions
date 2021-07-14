@@ -1,0 +1,23 @@
+{
+  "name": "graphql-pg-listen-subscriptions",
+  "version": "0.0.1",
+  "main": "build/index.js",
+  "repository": "git@github.com:acro5piano/graphql-pg-listen-subscriptions",
+  "author": "gosho-kazuya <ketsume0211@gmail.com>",
+  "license": "MIT",
+  "types": "build/index.d.ts",
+  "peerDependencies": {
+    "graphql-subscriptions": "^1.2.1",
+    "pg-listen": "^1.7.0"
+  },
+  "devDependencies": {
+    "graphql-subscriptions": "^1.2.1",
+    "pg-listen": "^1.7.0",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "npm run build"
+  }
+}
